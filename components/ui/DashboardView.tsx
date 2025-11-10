@@ -18,6 +18,21 @@ export default function DashboardView() {
   const filtered = useMemo(() => data.filter(d => d.timestamp >= window.startTs && d.timestamp <= window.endTs), [data, window.endTs, window.startTs]);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  // Resolve CSS variables to concrete color strings so chart canvases receive valid colors
+  const getColorVar = (name: string, fallback: string) => {
+    if (typeof window === 'undefined') return fallback;
+    try {
+      const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+      return (v || fallback).trim();
+    } catch (e) {
+      return fallback;
+    }
+  };
+
+  const accent = getColorVar('--accent', '#7c3aed');
+  const accent2 = getColorVar('--accent-2', '#fb7185');
+  const neutral = getColorVar('--muted', '#6b7280');
+
   return (
     <div className="grid" style={{ gap: 12 }}>
       <div className="row">
@@ -38,34 +53,34 @@ export default function DashboardView() {
         <div className="panel" style={{ height: 300 }}>
           <h3 className="title">Line Chart</h3>
           <div className="legend">
-            <span className="legend-item"><span className="legend-swatch" style={{ background: '#4cc38a' }}></span>value</span>
+            <span className="legend-item"><span className="legend-swatch" style={{ background: accent }}></span>value</span>
           </div>
           <div style={{ height: 260 }}>
-            <LineChart data={filtered} color="#4cc38a" />
+            <LineChart data={filtered} color={accent} />
           </div>
         </div>
         <div className="panel" style={{ height: 300 }}>
           <h3 className="title">Bar Chart</h3>
           <div className="legend">
-            <span className="legend-item"><span className="legend-swatch" style={{ background: '#3b82f6' }}></span>value</span>
+            <span className="legend-item"><span className="legend-swatch" style={{ background: accent2 }}></span>value</span>
           </div>
           <div style={{ height: 260 }}>
-            <BarChart data={filtered} color="#3b82f6" />
+            <BarChart data={filtered} color={accent2} />
           </div>
         </div>
         <div className="panel" style={{ height: 300 }}>
           <h3 className="title">Scatter Plot</h3>
           <div className="legend">
-            <span className="legend-item"><span className="legend-swatch" style={{ background: '#eab308' }}></span>value</span>
+            <span className="legend-item"><span className="legend-swatch" style={{ background: neutral }}></span>value</span>
           </div>
           <div style={{ height: 260 }}>
-            <ScatterPlot data={filtered} color="#eab308" />
+            <ScatterPlot data={filtered} color={neutral} />
           </div>
         </div>
         <div className="panel" style={{ height: 300 }}>
           <h3 className="title">Heatmap</h3>
           <div className="legend">
-            <span className="legend-item"><span className="legend-swatch" style={{ background: '#3b82f6' }}></span>density</span>
+            <span className="legend-item"><span className="legend-swatch" style={{ background: accent2 }}></span>density</span>
           </div>
           <div style={{ height: 260 }}>
             <Heatmap data={filtered} />
