@@ -6,6 +6,11 @@
   --text: #0f172a;
   --accent: #7c3aed; /* purple */
   --accent-2: #fb7185; /* coral */
+  --accent-3: #06b6d4; /* cyan */
+  --accent-4: #f59e0b; /* amber */
+  --chart-bg: #ffffff;
+  --chart-text: #0f172a;
+  --chart-grid: #e5e7eb;
 }
 *{box-sizing:border-box}
 html,body{height:100%}

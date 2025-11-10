@@ -52,7 +52,7 @@ export default function Heatmap({ data }: { data: ReadonlyArray<DataPoint> }) {
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         const v = grid[y * cols + x] / maxCount;
-        ctx.fillStyle = `rgba(59,130,246,${Math.min(1, v * 1.1)})`;
+        ctx.fillStyle = `rgba(251, 113, 133, ${Math.min(1, v * 1.1)})`;
         ctx.fillRect(Math.floor(margin.left + x * cw), Math.floor(margin.top + y * ch), Math.ceil(cw) + 1, Math.ceil(ch) + 1);
       }
     }

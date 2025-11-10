@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <main className="container" style={{ display: 'grid', gap: 16 }}>
-      <section className="panel" style={{ padding: 20, background: 'linear-gradient(135deg, #0f1115 0%, #141a23 60%)' }}>
+      <section className="panel" style={{ padding: 20, background: 'linear-gradient(135deg, var(--bg) 0%, var(--panel) 60%)' }}>
         <h1 className="title" style={{ fontSize: 28, marginBottom: 6 }}>
           High-Performance Real‑Time Dashboard
         </h1>
@@ -12,7 +12,7 @@ export default function Home() {
         </p>
         <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
           <Link href="/dashboard">
-            <button style={{ background: 'linear-gradient(135deg,#3b82f6,#4cc38a)', border: 'none', fontWeight: 600 }}>Open Dashboard</button>
+            <button style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-2))', border: 'none', fontWeight: 600 }}>Open Dashboard</button>
           </Link>
           <Link href="/api/data?size=500" target="_blank">
             <button>View Data API</button>

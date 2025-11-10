@@ -4,7 +4,8 @@ import { useChartRenderer } from '@/hooks/useChartRenderer';
 import type { DataPoint } from '@/lib/types';
 import { linearTicks, timeTicks } from '@/lib/axisUtils';
 
-export default function BarChart({ data, color = '#3b82f6' }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+export default function BarChart({ data, color }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+  const resolvedColor = color || 'var(--accent-2)';
   const points = useMemo(() => data, [data]);
   const { canvasRef } = useChartRenderer((ctx, canvas) => {
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -52,7 +53,7 @@ export default function BarChart({ data, color = '#3b82f6' }: { data: ReadonlyAr
 
     // bars
     const barW = Math.max(1, iw / points.length);
-    ctx.fillStyle = color;
+    ctx.fillStyle = resolvedColor;
     for (let i = 0; i < points.length; i++) {
       const p = points[i];
       const x = sx(p.timestamp) - barW/2;

@@ -4,7 +4,8 @@ import { useChartRenderer } from '@/hooks/useChartRenderer';
 import type { DataPoint } from '@/lib/types';
 import { linearTicks, timeTicks } from '@/lib/axisUtils';
 
-export default function ScatterPlot({ data, color = '#eab308' }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+export default function ScatterPlot({ data, color }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+  const resolvedColor = color || 'var(--accent-3)';
   const points = useMemo(() => data, [data]);
   const { canvasRef } = useChartRenderer((ctx, canvas) => {
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -36,7 +37,7 @@ export default function ScatterPlot({ data, color = '#eab308' }: { data: Readonl
     xTicks.forEach(t => ctx.fillText(new Date(t).toLocaleTimeString(), sx(t), margin.top + ih + 4));
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
 
-    ctx.fillStyle = color;
+    ctx.fillStyle = resolvedColor;
     for (let i = 0; i < points.length; i++) {
       const p = points[i];
       const x = sx(p.timestamp);

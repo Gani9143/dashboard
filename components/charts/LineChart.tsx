@@ -4,7 +4,8 @@ import { useChartRenderer } from '@/hooks/useChartRenderer';
 import type { DataPoint } from '@/lib/types';
 import { linearTicks, timeTicks } from '@/lib/axisUtils';
 
-export default function LineChart({ data, color = '#4cc38a' }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+export default function LineChart({ data, color }: { data: ReadonlyArray<DataPoint>; color?: string }) {
+  const resolvedColor = color || 'var(--accent)';
   const points = useMemo(() => data, [data]);
   const mouseRef = useRef<{x:number;y:number}|null>(null);
   const [tooltip, setTooltip] = useState<{x:number;y:number;label:string}|null>(null);
@@ -58,7 +59,7 @@ export default function LineChart({ data, color = '#4cc38a' }: { data: ReadonlyA
 
     // data line
     ctx.lineWidth = 1.6;
-    ctx.strokeStyle = color;
+    ctx.strokeStyle = resolvedColor;
     ctx.beginPath();
     ctx.moveTo(sx(points[0].timestamp), sy(points[0].value));
     for (let i = 1; i < points.length; i++) {
@@ -125,7 +126,7 @@ export default function LineChart({ data, color = '#4cc38a' }: { data: ReadonlyA
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <canvas ref={canvasRef} />
       {tooltip && (
-        <div style={{ position: 'absolute', left: tooltip.x, top: tooltip.y, background: '#0b0e14', border: '1px solid #232a36', borderRadius: 6, padding: '4px 6px', fontSize: 12, color: '#e6edf3', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
+        <div style={{ position: 'absolute', left: tooltip.x, top: tooltip.y, background: 'var(--panel)', border: '1px solid var(--chart-grid)', borderRadius: 6, padding: '4px 6px', fontSize: 12, color: 'var(--text)', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
           {tooltip.label}
         </div>
       )}
