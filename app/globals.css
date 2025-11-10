@@ -1,10 +1,11 @@
 :root{
-  --bg: #0f1115;
-  --panel: #14161a;
-  --muted: #97a2b1;
+  /* New theme: deep navy background, cool-cyan primary accent and warm-amber secondary */
+  --bg: #071025;
+  --panel: #0e1724;
+  --muted: #95a1b0;
   --text: #e6edf3;
-  --accent: #4cc38a;
-  --accent-2: #3b82f6;
+  --accent: #06b6d4; /* cyan */
+  --accent-2: #f59e0b; /* amber */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
